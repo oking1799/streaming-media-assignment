@@ -1,24 +1,26 @@
-version:2
-jobs:
-build:
-docker:
+version: 2
+  jobs:
+    build:
+      docker:
 #specifytheversionyoudesirehere
--image:circleci/node:12.18.3
+        -image:circleci/node:12.18.3
 
 working_directory:~/repo
 
 steps:
--checkout
+  -checkout
 
 -restore_cache:
-keys:
--v1-dependencies-{{checksum"package.json"}}
--v1-dependencies-
+  keys:
+    -v1-dependencies-{{checksum"package.json"}}
+    -v1-dependencies-
+    
 -run:yarninstall
+
 -save_cache:
-paths:
--node_modules
-key:v1-dependencies-{{checksum"package.json"}}
+  paths:
+    -node_modules
+  key:v1-dependencies-{{checksum"package.json"}}
 
 -run:yarntest
 
